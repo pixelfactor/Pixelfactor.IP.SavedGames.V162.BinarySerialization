@@ -633,11 +633,11 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
                 }
 
                 var fleetId = reader.ReadInt32();
-                var fleet = fleets.FirstOrDefault(e => e.Id == fleetId);
+                npcPilot.Fleet = fleets.FirstOrDefault(e => e.Id == fleetId);
 
-                if (fleet != null)
+                if (npcPilot.Fleet != null)
                 {
-                    fleet.Npcs.Add(npcPilot);
+                    npcPilot.Fleet.Npcs.Add(npcPilot);
                 }
             }
         }
