@@ -1,5 +1,6 @@
 ﻿using Pixelfactor.IP.SavedGames.V162.Model.Factions;
 using Pixelfactor.IP.SavedGames.V162.Model.Factions.FactionAITypes;
+using System.IO;
 
 namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers.Helpers
 {

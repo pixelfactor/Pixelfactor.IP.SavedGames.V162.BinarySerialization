@@ -1,6 +1,9 @@
 ﻿using Pixelfactor.IP.SavedGames.V162.Model;
 using Pixelfactor.IP.SavedGames.V162.Model.Jobs;
 using Pixelfactor.IP.SavedGames.V162.Model.Jobs.ActiveJobs;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers.Helpers
 {

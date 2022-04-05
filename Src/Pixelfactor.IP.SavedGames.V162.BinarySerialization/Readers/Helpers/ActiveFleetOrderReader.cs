@@ -2,6 +2,9 @@
 using Pixelfactor.IP.SavedGames.V162.Model.FleetOrders;
 using Pixelfactor.IP.SavedGames.V162.Model.FleetOrders.ActiveOrderTypes;
 using Pixelfactor.IP.SavedGames.V162.Model.FleetOrders.ActiveOrderTypes.Models;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers.Helpers
 {

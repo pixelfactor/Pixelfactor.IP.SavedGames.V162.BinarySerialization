@@ -4,6 +4,10 @@ using Pixelfactor.IP.SavedGames.V162.Model;
 using Pixelfactor.IP.SavedGames.V162.Model.Factions;
 using Pixelfactor.IP.SavedGames.V162.Model.Factions.Bounty;
 using Pixelfactor.IP.SavedGames.V162.Model.Jobs;
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
 {

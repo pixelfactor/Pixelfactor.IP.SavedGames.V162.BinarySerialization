@@ -1,5 +1,6 @@
 ﻿using Pixelfactor.IP.SavedGames.V162.Model.Jobs;
 using Pixelfactor.IP.SavedGames.V162.Model.Jobs.ActiveJobs;
+using System.IO;
 
 namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers.Helpers
 {

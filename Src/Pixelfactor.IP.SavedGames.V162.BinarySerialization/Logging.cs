@@ -1,4 +1,6 @@
-﻿namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization
+﻿using System;
+
+namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization
 {
     /// <summary>
     /// TODO: Don't log to console

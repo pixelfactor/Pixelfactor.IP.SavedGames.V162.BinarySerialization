@@ -1,6 +1,8 @@
 ﻿using Pixelfactor.IP.SavedGames.V162.Model;
 using Pixelfactor.IP.SavedGames.V162.Model.Factions;
 using Pixelfactor.IP.SavedGames.V162.Model.Factions.FactionAITypes;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers.Helpers
 {

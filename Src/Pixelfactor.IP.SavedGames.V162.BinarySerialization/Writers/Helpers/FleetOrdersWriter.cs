@@ -1,5 +1,7 @@
 ﻿using Pixelfactor.IP.SavedGames.V162.Model.FleetOrders;
 using Pixelfactor.IP.SavedGames.V162.Model.FleetOrders.OrderTypes;
+using System;
+using System.IO;
 
 namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers.Helpers
 {

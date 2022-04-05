@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>disable</Nullable>
     <Copyright>Pixelfactor Ltd.</Copyright>
     <Description>Binary reader/writer for the the v1.6.2 save file version of Interstellar Pilot.</Description>

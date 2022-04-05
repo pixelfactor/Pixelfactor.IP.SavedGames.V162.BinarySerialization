@@ -1,4 +1,8 @@
 ﻿using Pixelfactor.IP.SavedGames.V162.Model;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
 {
