@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <Copyright>Pixelfactor Ltd.</Copyright>
+    <Description>Binary reader/writer for the the v1.6.2 save file version of Interstellar Pilot.</Description>
+    <Authors>Pixelfactor Ltd.</Authors>
+    <Company>Pixelfactor Ltd.</Company>
+    <Product>Interstellar Pilot Save File V1.6.2 Binary Serialization</Product>
+    <PackageProjectUrl>https://github.com/pixelfactor/Pixelfactor.IP.SavedGames.V162.BinarySerialization</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pixelfactor/Pixelfactor.IP.SavedGames.V162.BinarySerialization</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Pixelfactor.IP.SavedGames.V162.Model" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
