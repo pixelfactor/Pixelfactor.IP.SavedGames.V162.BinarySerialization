@@ -99,7 +99,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
 
             PrintStatus("Saved fleets", writer);
 
-            WritePeople(writer, savedGame.People);
+            WritePeople(writer, savedGame.People, savedGame.Player?.Person);
             PrintStatus("Saved people", writer);
 
             WriteNpcPilots(writer, savedGame.People);
@@ -246,7 +246,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
             writer.Write(transaction.CurrentBalance);
             writer.WriteUnitId(transaction.LocationUnit);
             writer.WriteFactionId(transaction.OtherFaction);
-            writer.Write(transaction.RelatedCargoClassId);
+            writer.Write((int)transaction.RelatedCargoClass);
             writer.Write((int)transaction.RelatedUnitClass);
             writer.Write(transaction.GameWorldTime);
         }
@@ -468,19 +468,20 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
             writer.WriteFleetId(npcPilot.Fleet);
         }
 
-        private void WritePeople(BinaryWriter writer, IList<Person> people)
+        private void WritePeople(BinaryWriter writer, IList<Person> people, Person playerPerson)
         {
             writer.Write(people.Count);
 
             foreach (var person in people)
             {
-                WritePerson(writer, person);
+                WritePerson(writer, person, person == playerPerson);
             }
         }
 
         private static void WritePerson(
             BinaryWriter writer,
-            Person person)
+            Person person,
+            bool isPlayerPerson)
         {
             writer.WritePersonId(person);
 
@@ -502,7 +503,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
             writer.WriteUnitId(person.CurrentUnit);
             writer.Write(person.IsPilot);
             writer.Write(person.Kills);
-            writer.Write(person.IsPlayer);
+            writer.Write(isPlayerPerson);
             writer.Write(person.NpcPilotSettings != null);
             if (person.NpcPilotSettings != null)
             {
@@ -830,7 +831,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
                 {
                     writer.WriteUnitId(moddedUnit);
                     writer.Write(item.BayId);
-                    writer.Write(item.ComponentClassId);
+                    writer.Write((int)item.ComponentClass);
                 }
             }
         }
@@ -966,7 +967,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
 
         private void WriteUnitCargoData(BinaryWriter writer, UnitCargoData unitCargoData)
         {
-            writer.Write(unitCargoData.CargoClassId);
+            writer.Write((int)unitCargoData.CargoClass);
             writer.Write(unitCargoData.Quantity);
             writer.Write(unitCargoData.Expires);
             writer.Write(unitCargoData.ExpiryTime);
@@ -1033,7 +1034,10 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
 
         private void WriteAllFactionOpinions(BinaryWriter writer, IEnumerable<Faction> factions)
         {
-            var factionOpinions = factions.Where(e => e.Opinions?.Items.Count > 0).Select(e => new { Faction = e, Items = e.Opinions.Items }).ToList();
+            var factionOpinions = factions
+                .Where(e => e.Opinions?.Items.Count > 0)
+                .Select(e => new { Faction = e, Items = e.Opinions.Items.Where(item => item.OtherFaction != e ).ToList() }) // Filter out invalid ones where faction has opinion with itself. This will crash the game's reader
+                .ToList();
             writer.Write(factionOpinions.SelectMany(e => e.Items).Count());
             foreach (var faction in factionOpinions)
             {

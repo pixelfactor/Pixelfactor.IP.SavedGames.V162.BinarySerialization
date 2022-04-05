@@ -7,7 +7,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers.Helpers
     {
         public static void Write(BinaryWriter writer, ComponentUnitCargoDataItem cargoItem)
         {
-            writer.Write(cargoItem.CargoClassId);
+            writer.Write((int)cargoItem.CargoClass);
             writer.Write(cargoItem.Quantity);
         }
     }

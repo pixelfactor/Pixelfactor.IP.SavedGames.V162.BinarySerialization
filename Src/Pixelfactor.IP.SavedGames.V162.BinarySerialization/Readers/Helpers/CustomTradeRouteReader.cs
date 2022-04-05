@@ -17,7 +17,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers.Helpers
             var buyPriceMultiplier = reader.ReadSingle();
 
             // TODO: Verify all this stuff
-            tradeRoute.CargoClassId = cargoClassId;
+            tradeRoute.CargoClass = (CargoClass)cargoClassId;
             tradeRoute.BuyLocation = units.FirstOrDefault(e => e.Id == buyLocationUnitId);
             tradeRoute.SellLocation = units.FirstOrDefault(e => e.Id == sellLocationUnitId);
             tradeRoute.BuyPriceMultiplier = buyPriceMultiplier;

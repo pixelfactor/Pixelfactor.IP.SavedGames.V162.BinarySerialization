@@ -154,10 +154,10 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers.Helpers
 
                         writer.Write(o.TradeOnlySpecificCargoClasses);
 
-                        writer.Write(o.TradeSpecificCargoClassIds.Count);
-                        foreach (var cargoClassId in o.TradeSpecificCargoClassIds)
+                        writer.Write(o.TradeSpecificCargoClasses.Count);
+                        foreach (var cargoClass in o.TradeSpecificCargoClasses)
                         {
-                            writer.Write(cargoClassId);
+                            writer.Write((int)cargoClass);
                         }
                     }
                     break;
@@ -208,10 +208,10 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers.Helpers
                         writer.WriteUnitId(o.ManualBuyerUnit);
                         writer.Write(o.CustomSellCargoTime);
 
-                        writer.Write(o.SellCargoClassIds.Count);
-                        foreach (var cargoClassId in o.SellCargoClassIds)
+                        writer.Write(o.SellCargoClasses.Count);
+                        foreach (var cargoClass in o.SellCargoClasses)
                         {
-                            writer.Write(cargoClassId);
+                            writer.Write((int)cargoClass);
                         }
 
                         writer.Write(o.SellEquipment);

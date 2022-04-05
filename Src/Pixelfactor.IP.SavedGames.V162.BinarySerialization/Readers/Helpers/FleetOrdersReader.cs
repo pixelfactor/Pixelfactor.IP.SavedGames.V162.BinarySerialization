@@ -249,12 +249,12 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers.Helpers
 
                         o.TradeOnlySpecificCargoClasses = reader.ReadBoolean();
 
-                        o.TradeSpecificCargoClassIds.Clear();
+                        o.TradeSpecificCargoClasses.Clear();
                         var cargoCount = reader.ReadInt32();
                         for (var i = 0; i < cargoCount; i++)
                         {
                             // TODO: Change cargo class id to enum
-                            o.TradeSpecificCargoClassIds.Add(reader.ReadInt32());
+                            o.TradeSpecificCargoClasses.Add((CargoClass)reader.ReadInt32());
                         }
                     }
                     break;
@@ -318,7 +318,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers.Helpers
                         {
                             // TODO: Validate
                             var cargoClassId = reader.ReadInt32();
-                            o.SellCargoClassIds.Add(cargoClassId);
+                            o.SellCargoClasses.Add((CargoClass)cargoClassId);
                         }
 
                         o.SellEquipment = reader.ReadBoolean();

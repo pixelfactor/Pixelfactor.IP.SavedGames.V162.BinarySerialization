@@ -8,7 +8,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers.Helpers
         public static ComponentUnitCargoDataItem Read(BinaryReader reader)
         {
             var item = new ComponentUnitCargoDataItem();
-            item.CargoClassId = reader.ReadInt32();
+            item.CargoClass = (CargoClass)reader.ReadInt32();
             item.Quantity = reader.ReadInt32();
             return item;
         }

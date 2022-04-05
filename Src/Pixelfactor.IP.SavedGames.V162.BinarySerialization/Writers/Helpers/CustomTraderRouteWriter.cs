@@ -7,7 +7,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers.Helpers
     {
         public static void Write(BinaryWriter writer, CustomTradeRoute customTradeRoute)
         {
-            writer.Write(customTradeRoute.CargoClassId);
+            writer.Write((int)customTradeRoute.CargoClass);
             writer.WriteUnitId(customTradeRoute.BuyLocation);
             writer.WriteUnitId(customTradeRoute.SellLocation);
             writer.Write(customTradeRoute.BuyPriceMultiplier);

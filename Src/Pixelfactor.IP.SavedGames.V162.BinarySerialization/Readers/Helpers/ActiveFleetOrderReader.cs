@@ -190,9 +190,9 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers.Helpers
 
                         a.SellExpireTime = reader.ReadDouble();
 
-                        // TODO: Validate cargo class. Change to enum
+                        // TODO: Validate cargo class.
                         var cargoClassId = reader.ReadInt32();
-                        a.SellCargoClassId = cargoClassId;
+                        a.SellCargoClass = (CargoClass)cargoClassId;
 
                         // TODO: Validate
                         var targetUnitId = reader.ReadInt32();

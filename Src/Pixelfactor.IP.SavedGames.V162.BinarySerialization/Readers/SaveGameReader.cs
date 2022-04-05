@@ -108,7 +108,9 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
 
             PrintStatus("Loaded fleets", reader);
 
-            savedGame.People.AddRange(ReadPeople(reader, savedGame.Factions, savedGame.Units));
+            var people = ReadPeople(reader, savedGame.Factions, savedGame.Units, out Person playerPerson);
+            savedGame.People.AddRange(people);
+
             PrintStatus("Loaded people", reader);
 
             ReadNpcPilots(reader, savedGame.People, savedGame.Fleets);
@@ -150,6 +152,8 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
                     savedGame.Sectors,
                     savedGame.Units,
                     savedGame.ActiveJobs);
+
+                savedGame.Player.Person = playerPerson;
 
                 PrintStatus("Loaded player data", reader);
             }
@@ -296,7 +300,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
             transaction.CurrentBalance = reader.ReadInt32();
             transaction.LocationUnit = reader.ReadUnit(units);
             transaction.OtherFaction = reader.ReadFaction(factions);
-            transaction.RelatedCargoClassId = reader.ReadInt32();
+            transaction.RelatedCargoClass = (CargoClass)reader.ReadInt32();
             transaction.RelatedUnitClass = (UnitClass)reader.ReadInt32();
             transaction.GameWorldTime = reader.ReadDouble();
             return transaction;
@@ -652,21 +656,32 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
             return npcPilot;
         }
 
-        private IEnumerable<Person> ReadPeople(BinaryReader reader, IEnumerable<Faction> factions, IEnumerable<Unit> units)
+        private IEnumerable<Person> ReadPeople(BinaryReader reader, IEnumerable<Faction> factions, IEnumerable<Unit> units, out Person playerPerson)
         {
+            playerPerson = null;
+
+            var people = new List<Person>(100);
             var count = reader.ReadInt32();
 
             for (var i = 0; i < count; i++)
             {
-                var person = ReadPerson(reader, factions, units);
-                yield return person;
+                var person = ReadPerson(reader, factions, units, out bool isPlayer);
+                if (isPlayer)
+                {
+                    playerPerson = person;
+                }
+
+                people.Add(person);
             }
+
+            return people;
         }
 
         private static Person ReadPerson(
             BinaryReader reader,
             IEnumerable<Faction> factions,
-            IEnumerable<Unit> units)
+            IEnumerable<Unit> units,
+            out bool isPlayer)
         {
             var id = reader.ReadInt32();
 
@@ -713,7 +728,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
             }
 
             person.Kills = reader.ReadInt32();
-            person.IsPlayer = reader.ReadBoolean();
+            isPlayer = reader.ReadBoolean();
 
             var hasUnitControllerProfile = reader.ReadBoolean();
             if (hasUnitControllerProfile)
@@ -1292,7 +1307,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
                     unit.ComponentUnitData.ModData.Items.Add(new ComponentUnitModDataItem
                     {
                         BayId = bayId,
-                        ComponentClassId = componentClassId
+                        ComponentClass = (ComponentClass)componentClassId
                     });
                 }
             }
@@ -1496,7 +1511,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
         private UnitCargoData ReadUnitCargoData(BinaryReader reader)
         {
             var unitCargoData = new UnitCargoData();
-            unitCargoData.CargoClassId = reader.ReadInt32();
+            unitCargoData.CargoClass = (CargoClass)reader.ReadInt32();
             unitCargoData.Quantity = reader.ReadInt32();
             unitCargoData.Expires = reader.ReadBoolean();
             unitCargoData.ExpiryTime = reader.ReadDouble();
@@ -1598,26 +1613,33 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
                 var opinion = reader.ReadSingle();
 
                 var faction = factions.FirstOrDefault(e => e.Id == factionId);
-                var otherFaction = factions.FirstOrDefault(e => e.Id == factionId);
+                var otherFaction = factions.FirstOrDefault(e => e.Id == otherFactionId);
 
                 if (faction != null)
                 {
-                    if (faction.Opinions == null)
+                    if (otherFaction == faction)
                     {
-                        faction.Opinions = new FactionOpinionData();
-                    }
-
-                    if (otherFaction != null)
-                    {
-                        faction.Opinions.Items.Add(new FactionOpinionDataItem
-                        {
-                            OtherFaction = otherFaction,
-                            Opinion = opinion
-                        });
+                        Logging.Warning($"Faction opinion for faction {factionId} is referencing itself. Item will not be loaded.");
                     }
                     else
                     {
-                        Logging.UnknownFactionMessage(otherFactionId, "loading faction opinions");
+                        if (faction.Opinions == null)
+                        {
+                            faction.Opinions = new FactionOpinionData();
+                        }
+
+                        if (otherFaction != null)
+                        {
+                            faction.Opinions.Items.Add(new FactionOpinionDataItem
+                            {
+                                OtherFaction = otherFaction,
+                                Opinion = opinion
+                            });
+                        }
+                        else
+                        {
+                            Logging.UnknownFactionMessage(otherFactionId, "loading faction opinions");
+                        }
                     }
                 }
                 else

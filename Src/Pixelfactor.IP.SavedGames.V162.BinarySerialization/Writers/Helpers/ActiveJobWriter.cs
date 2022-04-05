@@ -41,7 +41,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers.Helpers
                         var courierMission = (ActiveCourierJob)activeJob;
                         writer.WriteUnitId(courierMission.PickupUnit);
                         writer.WriteUnitId(courierMission.DestinationUnit);
-                        writer.Write((int)courierMission.CargoItem.CargoClassId);
+                        writer.Write((int)courierMission.CargoItem.CargoClass);
                         writer.Write(courierMission.CargoItem.Quantity);
                         writer.Write(courierMission.HasPlayerPickedUpCargo);
                     }

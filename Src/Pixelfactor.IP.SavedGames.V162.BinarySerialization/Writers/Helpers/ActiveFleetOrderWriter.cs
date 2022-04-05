@@ -127,7 +127,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers.Helpers
                     {
                         var a = (ActiveSellCargoOrder)activeFleetOrder;
                         writer.Write(a.SellExpireTime);
-                        writer.Write((int)a.SellCargoClassId);
+                        writer.Write((int)a.SellCargoClass);
                         writer.WriteUnitId(a.TraderTargetUnit);
                         writer.Write((int)a.State);
                     }
