@@ -20,6 +20,15 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
             this.headerWriter = headerWriter;
         }
 
+        public static void WriteToPath(SavedGame savedGame, string path)
+        {
+            using (var writer = new BinaryWriter(File.OpenWrite(path)))
+            {
+                var savedGameWriter = new SaveGameWriter(new HeaderWriter());
+                savedGameWriter.Write(writer, savedGame);
+            }
+        }
+
         public void Write(BinaryWriter writer, SavedGame savedGame)
         {
             this.headerWriter.Write(writer, savedGame.Header);

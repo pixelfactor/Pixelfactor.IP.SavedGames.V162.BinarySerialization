@@ -21,6 +21,15 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
             this.headerReader = headerReader;
         }
 
+        public static SavedGame ReadFromPath(string path)
+        {
+            using (var reader = new BinaryReader(File.OpenRead(path)))
+            {
+                var savedGameReader = new SaveGameReader(new HeaderReader());
+                return savedGameReader.Read(reader);
+            }
+        }
+
         public SavedGame Read(BinaryReader reader)
         {
             var savedGame = new SavedGame();
