@@ -8,18 +8,18 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
 {
     public static class BinaryReaderExtensions
     {
-        public static Vector3 ReadVector3(this BinaryReader reader)
+        public static Vec3 ReadVector3(this BinaryReader reader)
         {
-            var v = new Vector3();
+            var v = new Vec3();
             v.X = reader.ReadSingle();
             v.Y = reader.ReadSingle();
             v.Z = reader.ReadSingle();
             return v;
         }
 
-        public static Vector4 ReadVector4(this BinaryReader reader)
+        public static Vec4 ReadVector4(this BinaryReader reader)
         {
-            var v = new Vector4();
+            var v = new Vec4();
             v.X = reader.ReadSingle();
             v.Y = reader.ReadSingle();
             v.Z = reader.ReadSingle();

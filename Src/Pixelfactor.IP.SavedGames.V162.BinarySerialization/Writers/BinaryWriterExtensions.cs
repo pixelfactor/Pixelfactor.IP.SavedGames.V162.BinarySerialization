@@ -6,14 +6,14 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
 {
     public static class BinaryWriterExtensions
     {
-        public static void WriteVector3(this BinaryWriter writer, Vector3 vector3)
+        public static void WriteVector3(this BinaryWriter writer, Vec3 vector3)
         {
             writer.Write(vector3.X);
             writer.Write(vector3.Y);
             writer.Write(vector3.Z);
         }
 
-        public static void WriteVector4(this BinaryWriter writer, Vector4 vector4)
+        public static void WriteVector4(this BinaryWriter writer, Vec4 vector4)
         {
             writer.Write(vector4.X);
             writer.Write(vector4.Y);
@@ -21,7 +21,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
             writer.Write(vector4.Z);
         }
 
-        public static void WriteNullableVector3(this BinaryWriter writer, Vector3? vector3)
+        public static void WriteNullableVector3(this BinaryWriter writer, Vec3? vector3)
         {
             writer.Write(vector3.HasValue);
             if (vector3.HasValue)

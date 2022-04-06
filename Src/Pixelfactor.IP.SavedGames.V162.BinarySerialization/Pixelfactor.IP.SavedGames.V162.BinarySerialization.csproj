@@ -10,11 +10,11 @@
     <Product>Interstellar Pilot Save File V1.6.2 Binary Serialization</Product>
     <PackageProjectUrl>https://github.com/pixelfactor/Pixelfactor.IP.SavedGames.V162.BinarySerialization</PackageProjectUrl>
     <RepositoryUrl>https://github.com/pixelfactor/Pixelfactor.IP.SavedGames.V162.BinarySerialization</RepositoryUrl>
-	<VersionPrefix>1.0.5</VersionPrefix>
+	<VersionPrefix>1.0.6</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pixelfactor.IP.SavedGames.V162.Model" Version="1.0.2" />
+    <PackageReference Include="Pixelfactor.IP.SavedGames.V162.Model" Version="1.0.5" />
   </ItemGroup>
 
 </Project>
