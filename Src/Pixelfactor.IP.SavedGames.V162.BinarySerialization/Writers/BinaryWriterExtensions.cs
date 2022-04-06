@@ -18,7 +18,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Writers
             writer.Write(vector4.X);
             writer.Write(vector4.Y);
             writer.Write(vector4.Z);
-            writer.Write(vector4.Z);
+            writer.Write(vector4.W);
         }
 
         public static void WriteNullableVector3(this BinaryWriter writer, Vec3? vector3)
