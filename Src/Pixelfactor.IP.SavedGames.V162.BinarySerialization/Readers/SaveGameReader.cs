@@ -393,6 +393,7 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
             }
             else
             {
+                message.MessageTemplateId = -1;
                 message.ToText = reader.ReadString();
                 message.FromText = reader.ReadString();
                 message.MessageText = reader.ReadString();

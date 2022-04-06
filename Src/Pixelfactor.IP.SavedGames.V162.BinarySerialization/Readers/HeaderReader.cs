@@ -27,5 +27,10 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers
 
             return header;
         }
+
+        public static Version ReadVersionOnly(BinaryReader reader)
+        {
+            return(reader.ReadVersion());
+        }
     }
 }
