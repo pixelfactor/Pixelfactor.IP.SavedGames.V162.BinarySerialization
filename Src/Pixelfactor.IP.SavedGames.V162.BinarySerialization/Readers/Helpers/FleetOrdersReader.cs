@@ -112,8 +112,6 @@ namespace Pixelfactor.IP.SavedGames.V162.BinarySerialization.Readers.Helpers
             var orderType = (FleetOrderType)reader.ReadInt32();
 
             var order = CreateFleetOrderFromType.Create(orderType);
-            order.OrderType = orderType;
-
             order.Id = reader.ReadInt32();
             order.CompletionMode = (FleetOrderCompletionMode)reader.ReadInt32();
             order.AllowCombatInterception = reader.ReadBoolean();
